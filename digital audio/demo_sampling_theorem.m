@@ -1,6 +1,6 @@
 % Sampling_theorem.m
 %
-% This script illustrate sampling theorem with animation  
+% This script illustrates sampling theorem with animation  
 %
 % "ratio" is defined as frequency of sampling rate over frequency of
 % sinusoid. Select one of the ratio settings to see if they are aliased or not  
