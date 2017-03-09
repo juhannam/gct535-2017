@@ -1,1 +1,3 @@
-# ctp535-2017
+# GCT535 Spring 2017
+
+Code Repository
