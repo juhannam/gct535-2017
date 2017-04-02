@@ -1,12 +1,17 @@
 %
 % Biquad filter demo script
 %
+% Version 0.1, Apr-1-2017 
+%
+% By Juhan Nam, KAIST
+%
+
 
 % user parameters
 fc = 1000; % Hz
 Q = 12; % dB
 fs = 44100; % Hz
-type='lowpass';
+type='lowpass'; % 'highpass', 'bandpass', 'notch'
 
 %% filter sweep
 
@@ -14,9 +19,6 @@ x = sinesweep(20,20000,2,44100,'exp');
 %soundsc(x,44100);
 
 [y, B, A] = biquad(x, type, fc, fs, Q);
-%y = biquad(x, 'highpass', fc, fs, Q);
-%y = biquad(x, 'bandpass', fc, fs, Q);
-%y = biquad(x, 'notch', fc, fs, Q);
 %soundsc(y,fs);
 
 figure(1)
@@ -51,24 +53,22 @@ title('Amplitude response');
 
 %% filter impulse response
 
-x = zeros(1,100); x(1)= 1;
+x = zeros(1,200); x(1)= 1;
 
-fc = 2000;
-Q = 2;
-fs = 44100;
 y = biquad(x, 'lowpass', fc, fs, Q);
-%y = biquad(x, 'bandpass', fc, fs, Q);
 
 figure(3);
 stem(y);
 hold off;
-ylim([-0.5 1.5]);
+ylim([-0.2 0.2]);
 grid on;
 set(gca, 'FontSize',15);
 title('Impulse Response');
 
 %% Sine-Analysis
 
+% input sinusoid
+f = 1200; % Hz
 x = sin(2*pi*f*[0:fs-1]/fs);
 x = [zeros(1,100) x(1:500) zeros(1,200)];
 
@@ -79,7 +79,7 @@ plot(x);
 hold on;
 plot(y, 'g');
 hold off;
-ylim([-1.5 1.5]);
+ylim([-4 4]);
 title('Sine Analysis');
 set(gca, 'FontSize',15);
 legend('input', 'output');
